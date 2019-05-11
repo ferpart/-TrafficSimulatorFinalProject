@@ -78,7 +78,7 @@ func Graph() {
 	g.AddEdge(&centerN, &centerW)
 
 	g.AddEdge(&centerW, &southF)
-	g.AddEdge(&centerW, &centerF)
+	g.AddEdge(&centerW, &centerS)
 
 	g.AddEdge(&centerS, &eastF)
 	g.AddEdge(&centerS, &centerE)
