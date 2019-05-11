@@ -2,36 +2,41 @@ package main
 
 var g ItemGraph
 
-//Graph : main for this class
+//Graph : initializer for this class
 func Graph() {
-	northF := Node{"", "N", "E, S, W", false, false, false, true}
-	northS := Node{"", "N", "", true, false, false, false}
-	northA := Node{"car", "N", "", false, false, true, false}
-	northB := Node{"car", "N", "", false, false, true, false}
-	northC := Node{"car", "N", "", false, false, true, false}
 
-	eastF := Node{"", "E", "N, S, W", false, false, false, true}
-	eastS := Node{"", "E", "", true, false, false, false}
-	eastA := Node{"car", "E", "", false, false, true, false}
-	eastB := Node{"car", "E", "", false, false, true, false}
-	eastC := Node{"car", "E", "", false, false, true, false}
+	northF := Node{mCar: nil, "Nf", "E, S, W", false, false, false, true}
 
-	southF := Node{"", "S", "N, E, W", false, false, false, true}
-	southS := Node{"", "S", "", true, false, false, false}
-	southA := Node{"car", "S", "", false, false, true, false}
-	southB := Node{"car", "S", "", false, false, true, false}
-	southC := Node{"car", "S", "", false, false, true, false}
+	northS := Node{mCar: nil, "Ns", "all", false, false, false, false}
+	northA := Node{mCar: nil, "Na", "all", false, false, false, false}
+	northB := Node{mCar: nil, "Nb", "all", false, false, false, false}
+	northC := Node{mCar: nil, "Nc", "all", false, false, false, false}
 
-	westF := Node{"", "W", "N, E, S", false, false, false, true}
-	westS := Node{"", "W", "", true, false, false, false}
-	westA := Node{"car", "W", "", false, false, true, false}
-	westB := Node{"car", "W", "", false, false, true, false}
-	westC := Node{"car", "W", "", false, false, true, false}
+	eastF := Node{mCar: nil, "Ef", "N, S, W", false, false, false, true}
 
-	centerN := Node{"", "N", "E, S, W", false, false, false, false}
-	centerE := Node{"", "E", "N, S, W", false, false, false, false}
-	centerS := Node{"", "S", "N, E, W", false, false, false, false}
-	centerW := Node{"", "W", "N, E, S", false, false, false, false}
+	eastS := Node{mCar: nil, "Es", "all", false, false, false, false}
+	eastA := Node{mCar: nil, "Ea", "all", false, false, false, false}
+	eastB := Node{mCar: nil, "Eb", "all", false, false, false, false}
+	eastC := Node{mCar: nil, "Ec", "all", false, false, false, false}
+
+	southF := Node{mCar: nil, "Sf", "N, E, W", false, false, false, true}
+
+	southS := Node{mCar: nil, "Ss", "all", false, false, false, false}
+	southA := Node{mCar: nil, "Sa", "all", false, false, false, false}
+	southB := Node{mCar: nil, "Sb", "all", false, false, false, false}
+	southC := Node{mCar: nil, "Sc", "all", false, false, false, false}
+
+	westF := Node{mCar: nil, "Wf", "N, E, S", false, false, false, true}
+
+	westS := Node{mCar: nil, "Ws", "all", false, false, false, false}
+	westA := Node{mCar: nil, "Wa", "all", false, false, false, false}
+	westB := Node{mCar: nil, "Wb", "all", false, false, false, false}
+	westC := Node{mCar: nil, "Wc", "all", false, false, false, false}
+
+	centerN := Node{mCar: nil, "N", "E, S, W", false, false, false, false}
+	centerE := Node{mCar: nil, "E", "N, S, W", false, false, false, false}
+	centerS := Node{mCar: nil, "S", "N, E, W", false, false, false, false}
+	centerW := Node{mCar: nil, "W", "N, E, S", false, false, false, false}
 
 	g.AddNode(&northF)
 	g.AddNode(&northA)
@@ -85,5 +90,4 @@ func Graph() {
 
 	g.AddEdge(&centerS, &northF)
 	g.AddEdge(&centerS, &centerN)
-
 }

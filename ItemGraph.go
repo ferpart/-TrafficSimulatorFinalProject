@@ -1,32 +1,54 @@
 package main
 
 import (
-	"fmt"
 	"sync"
 )
 
-type mcar string
-type id string
-type permit string
-type isSemaphor bool
-type semaphorState bool
-type hasCar bool
-type isFinal bool
-
 //Node : Base structure for graph node implementation.
 type Node struct {
-	mcar
-	id
-	permit
-	isSemaphor
-	semaphorState
-	hasCar
-	isFinal
+	mCar          *Car
+	id            string
+	permit        string
+	isSemaphor    bool
+	semaphorState bool
+	hasCar        bool
+	isFinal       bool
 }
 
-func (n *Node) String() string {
-	return fmt.Sprintf("%s, %s", n.id, n.permit)
+func (n *Node) getCar() {
+	return n.mCar
+}
 
+func (n *Node) setCar(mCar bool) {
+	n.mCar = mCar
+}
+
+func (n *Node) getIsSemaphor() bool {
+	return n.isSemaphor
+}
+
+func (n *Node) setIsSemaphor(isSemaphor bool) {
+	n.isSemaphor = isSemaphor
+}
+
+func (n *Node) getSemaphorState() bool {
+	return n.semaphorState
+}
+
+func (n *Node) setSemaphorState(semaphoreState bool) {
+	n.semaphorState = semaphoreState
+}
+
+func (n *Node) getHasCar() bool {
+	return n.hasCar
+}
+
+func (n *Node) setHasCar(hasCar bool) {
+	n.hasCar = hasCar
+}
+
+func (n *Node) getisFinal() bool {
+	return isFinal
 }
 
 //ItemGraph : Node storage (graph).
@@ -53,19 +75,4 @@ func (g *ItemGraph) AddEdge(n1, n2 *Node) {
 	g.edges[*n2] = append(g.edges[*n2], n1)
 
 	g.lock.Unlock()
-}
-
-func (g *ItemGraph) String() {
-	g.lock.RLock()
-	s := ""
-	for i := 0; i < len(g.nodes); i++ {
-		s += g.nodes[i].String() + " -> "
-		near := g.edges[*g.nodes[i]]
-		for j := 0; j < len(near); j++ {
-			s += near[j].String() + " "
-		}
-		s += "\n"
-	}
-	fmt.Println(s)
-	g.lock.RUnlock()
 }
