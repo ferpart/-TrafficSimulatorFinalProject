@@ -41,26 +41,26 @@ func Graph() {
 	g.AddNode(&northA) // 0
 	g.AddNode(&northB) // 1
 	g.AddNode(&northC) // 2
-	g.AddNode(&northF) // 3
-	g.AddNode(&northS) // 4
+	g.AddNode(&northS) // 3
+	g.AddNode(&northF) // 4
 
 	g.AddNode(&eastA) // 5
 	g.AddNode(&eastB) // 6
 	g.AddNode(&eastC) // 7
-	g.AddNode(&eastF) // 8
-	g.AddNode(&eastS) // 9
+	g.AddNode(&eastS) // 8
+	g.AddNode(&eastF) // 9
 
 	g.AddNode(&southA) // 10
 	g.AddNode(&southB) // 11
 	g.AddNode(&southC) // 12
-	g.AddNode(&southF) // 13
-	g.AddNode(&southS) // 14
+	g.AddNode(&southS) // 13
+	g.AddNode(&southF) // 14
 
 	g.AddNode(&westA) // 15
 	g.AddNode(&westB) // 16
 	g.AddNode(&westC) // 17
-	g.AddNode(&westF) // 18
-	g.AddNode(&westS) // 19
+	g.AddNode(&westS) // 18
+	g.AddNode(&westF) // 19
 
 	g.AddNode(&centerN) // 20
 	g.AddNode(&centerE) // 21
