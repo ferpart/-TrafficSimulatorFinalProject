@@ -6,38 +6,38 @@ var m map[string]int
 //Graph : initializer for this class
 func Graph() {
 
-	northF := Node{nil, "Nf", "E, S, W", false, false, false, true}
+	northF := Node{nil, "northF", "E, S, W", false, false, false, true}
 
-	northS := Node{nil, "Ns", "all", false, false, false, false}
-	northA := Node{nil, "Na", "all", false, false, false, false}
-	northB := Node{nil, "Nb", "all", false, false, false, false}
-	northC := Node{nil, "Nc", "all", false, false, false, false}
+	northS := Node{nil, "northS", "all", false, false, false, false}
+	northA := Node{nil, "northA", "all", false, false, false, false}
+	northB := Node{nil, "northB", "all", false, false, false, false}
+	northC := Node{nil, "northC", "all", false, false, false, false}
 
-	eastF := Node{nil, "Ef", "N, S, W", false, false, false, true}
+	eastF := Node{nil, "eastF", "N, S, W", false, false, false, true}
 
-	eastS := Node{nil, "Es", "all", false, false, false, false}
-	eastA := Node{nil, "Ea", "all", false, false, false, false}
-	eastB := Node{nil, "Eb", "all", false, false, false, false}
-	eastC := Node{nil, "Ec", "all", false, false, false, false}
+	eastS := Node{nil, "eastS", "all", false, false, false, false}
+	eastA := Node{nil, "eastA", "all", false, false, false, false}
+	eastB := Node{nil, "eastB", "all", false, false, false, false}
+	eastC := Node{nil, "eastC", "all", false, false, false, false}
 
-	southF := Node{nil, "Sf", "N, E, W", false, false, false, true}
+	southF := Node{nil, "southF", "N, E, W", false, false, false, true}
 
-	southS := Node{nil, "Ss", "all", false, false, false, false}
-	southA := Node{nil, "Sa", "all", false, false, false, false}
-	southB := Node{nil, "Sb", "all", false, false, false, false}
-	southC := Node{nil, "Sc", "all", false, false, false, false}
+	southS := Node{nil, "southS", "all", false, false, false, false}
+	southA := Node{nil, "southA", "all", false, false, false, false}
+	southB := Node{nil, "southB", "all", false, false, false, false}
+	southC := Node{nil, "southC", "all", false, false, false, false}
 
-	westF := Node{nil, "Wf", "N, E, S", false, false, false, true}
+	westF := Node{nil, "westF", "N, E, S", false, false, false, true}
 
-	westS := Node{nil, "Ws", "all", false, false, false, false}
-	westA := Node{nil, "Wa", "all", false, false, false, false}
-	westB := Node{nil, "Wb", "all", false, false, false, false}
-	westC := Node{nil, "Wc", "all", false, false, false, false}
+	westS := Node{nil, "westS", "all", false, false, false, false}
+	westA := Node{nil, "westA", "all", false, false, false, false}
+	westB := Node{nil, "westB", "all", false, false, false, false}
+	westC := Node{nil, "westC", "all", false, false, false, false}
 
-	centerN := Node{nil, "N", "E, S, W", false, false, false, false}
-	centerE := Node{nil, "E", "N, S, W", false, false, false, false}
-	centerS := Node{nil, "S", "N, E, W", false, false, false, false}
-	centerW := Node{nil, "W", "N, E, S", false, false, false, false}
+	centerN := Node{nil, "centerN", "E, S, W", false, false, false, false}
+	centerE := Node{nil, "centerE", "N, S, W", false, false, false, false}
+	centerS := Node{nil, "centerS", "N, E, W", false, false, false, false}
+	centerW := Node{nil, "centerW", "N, E, S", false, false, false, false}
 
 	g.AddNode(&northA) // 0
 	g.AddNode(&northB) // 1
@@ -100,13 +100,6 @@ func Graph() {
 	g.AddEdge(&centerS, &northF)
 	g.AddEdge(&centerS, &centerN)
 
-}
-
-func getItemGraph() *ItemGraph {
-	return &g
-}
-
-func getIndex(s string) int {
 	m = make(map[string]int)
 	m["northA"] = 0
 	m["northB"] = 1
@@ -133,6 +126,22 @@ func getIndex(s string) int {
 	m["centerS"] = 22
 	m["centerW"] = 23
 
+}
+
+func getItemGraph() *ItemGraph {
+	return &g
+}
+
+func getIndex(s string) int {
+
+
 	return m[s]
 
+}
+
+func getPath (start, end *Node) string[]{
+	list := g.edges[getIndex(start)]
+	for _, e := range list{
+		if 
+	}
 }
