@@ -9,4 +9,5 @@ func main() {
 	city.printMap()
 	city.generateCars(4)
 	// city.run()
+
 }

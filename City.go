@@ -1,10 +1,17 @@
 package main
 
 import (
+	"errors"
 	"fmt"
+	"math/rand"
 	"sync"
 	"time"
 )
+
+var pointsNorth map[Point]bool
+var pointsEast map[Point]bool
+var pointsSouth map[Point]bool
+var pointsWest map[Point]bool
 
 // City :
 // Creates a city instance.
@@ -22,6 +29,7 @@ func (c *City) init() {
 
 // Creates a NxN matrix that will be the city map.
 func (c *City) createMap(n int) {
+
 	c.cMap = make([][]int, n, n)
 	for i := range c.cMap {
 		c.cMap[i] = make([]int, n, n)
@@ -47,6 +55,27 @@ func (c *City) createMap(n int) {
 			c.cMap[i][j] = 1
 		}
 	}
+
+	pointsNorth = make(map[Point]bool, 0)
+	pointsWest = make(map[Point]bool, 0)
+	pointsSouth = make(map[Point]bool, 0)
+	pointsEast = make(map[Point]bool, 0)
+
+	pointsNorth[Point{0, 4}] = false
+	pointsNorth[Point{1, 4}] = false
+	pointsNorth[Point{2, 4}] = false
+
+	pointsWest[Point{6, 0}] = false
+	pointsWest[Point{6, 1}] = false
+	pointsWest[Point{6, 2}] = false
+
+	pointsSouth[Point{8, 6}] = false
+	pointsSouth[Point{9, 6}] = false
+	pointsSouth[Point{10, 6}] = false
+
+	pointsEast[Point{4, 8}] = false
+	pointsEast[Point{4, 9}] = false
+	pointsEast[Point{4, 10}] = false
 
 }
 
@@ -85,11 +114,66 @@ func (c *City) printMap() {
 
 // Generates the Cars
 func (c *City) generateCars(cars int) {
-	Graph()
+	for i := 0; i < 4; i++ {
+		fmt.Println(getRandomPointStart())
+	}
+	/* Graph()
 	g := getItemGraph()
-	g.nodes[2].setCar(&Car{currentPos: Point{x: 1, y: 2}})
-	g.nodes[2].setHasCar(true)
-	fmt.Println(g.nodes[2].getCar())
+	g.nodes[0].setCar(&Car{currentPos: Point{x: 1, y: 2}})
+	g.nodes[1].setCar(&Car{currentPos: Point{x: 3, y: 4}})
+
+	g.nodes[0].setCar(&Car{currentPos: Point{x: 1, y: 2}})
+	g.nodes[1].setCar(&Car{currentPos: Point{x: 3, y: 4}})
+
+	g.nodes[0].setCar(&Car{currentPos: Point{x: 1, y: 2}})
+	g.nodes[1].setCar(&Car{currentPos: Point{x: 3, y: 4}})
+
+	g.nodes[0].setCar(&Car{currentPos: Point{x: 1, y: 2}})
+	g.nodes[1].setCar(&Car{currentPos: Point{x: 3, y: 4}})
+	fmt.Println(g.nodes[0].getCar())
+	fmt.Println(g.nodes[1].getCar()) */
+
+}
+
+func getRandomPointStart() (Point, error) {
+	r1 := rand.New(rand.NewSource(time.Now().UnixNano()))
+	i := r1.Intn(4)
+	fmt.Println(i)
+	switch i {
+	case 0:
+		for k, v := range pointsNorth {
+			if !v {
+				pointsNorth[k] = true
+				return k, nil
+			}
+		}
+		return Point{}, errors.New("didn't find a point available")
+	case 1:
+		for k, v := range pointsWest {
+			if !v {
+				pointsWest[k] = true
+				return k, nil
+			}
+		}
+		return Point{}, errors.New("didn't find a point available")
+	case 2:
+		for k, v := range pointsSouth {
+			if !v {
+				pointsSouth[k] = true
+				return k, nil
+			}
+		}
+		return Point{}, errors.New("didn't find a point available")
+	case 3:
+		for k, v := range pointsEast {
+			if !v {
+				pointsEast[k] = true
+				return k, nil
+			}
+		}
+		return Point{}, errors.New("didn't find a point available")
+	}
+	return Point{}, errors.New("didn't find a point available")
 }
 
 // Initialize the semaphores and cars, to move around the city.

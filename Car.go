@@ -8,15 +8,6 @@ type Car struct {
 	destinationPos Point // Destination point
 	velocity       float32
 	cMap           *City
-	isCar          bool
-}
-
-func (c *Car) setIsCar(isCar bool) {
-	c.isCar = isCar
-}
-
-func (c *Car) getIsCar() bool {
-	return c.isCar
 }
 
 func (c *Car) move() {
