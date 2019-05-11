@@ -38,29 +38,29 @@ func Graph() {
 	centerS := Node{nil, "S", "N, E, W", false, false, false, false}
 	centerW := Node{nil, "W", "N, E, S", false, false, false, false}
 
-	g.AddNode(&northF) // 0
-	g.AddNode(&northS) // 1
-	g.AddNode(&northA) // 2
-	g.AddNode(&northB) // 3
-	g.AddNode(&northC) // 4
+	g.AddNode(&northA) // 0
+	g.AddNode(&northB) // 1
+	g.AddNode(&northC) // 2
+	g.AddNode(&northF) // 3
+	g.AddNode(&northS) // 4
 
-	g.AddNode(&eastF) // 5
-	g.AddNode(&eastS) // 6
-	g.AddNode(&eastA) // 7
-	g.AddNode(&eastB) // 8
-	g.AddNode(&eastC) // 9
+	g.AddNode(&eastA) // 5
+	g.AddNode(&eastB) // 6
+	g.AddNode(&eastC) // 7
+	g.AddNode(&eastF) // 8
+	g.AddNode(&eastS) // 9
 
-	g.AddNode(&southF) // 10
-	g.AddNode(&southS) // 11
-	g.AddNode(&southA) // 12
-	g.AddNode(&southB) // 13
-	g.AddNode(&southC) // 14
+	g.AddNode(&southA) // 10
+	g.AddNode(&southB) // 11
+	g.AddNode(&southC) // 12
+	g.AddNode(&southF) // 13
+	g.AddNode(&southS) // 14
 
-	g.AddNode(&westF) // 15
-	g.AddNode(&westS) // 16
-	g.AddNode(&westA) // 17
-	g.AddNode(&westB) // 18
-	g.AddNode(&westC) // 19
+	g.AddNode(&westA) // 15
+	g.AddNode(&westB) // 16
+	g.AddNode(&westC) // 17
+	g.AddNode(&westF) // 18
+	g.AddNode(&westS) // 19
 
 	g.AddNode(&centerN) // 20
 	g.AddNode(&centerE) // 21
