@@ -12,7 +12,7 @@ type City struct {
 	cMap    [][]int
 	mutex   *sync.Mutex
 	semList []Semaphore
-	carList []Car
+	// carList []Car
 }
 
 // Initializes variables inside instance.
@@ -85,7 +85,11 @@ func (c *City) printMap() {
 
 // Generates the Cars
 func (c *City) generateCars(cars int) {
-
+	Graph()
+	g := getItemGraph()
+	g.nodes[2].setCar(&Car{currentPos: Point{x: 1, y: 2}})
+	g.nodes[2].setHasCar(true)
+	fmt.Println(g.nodes[2].getCar())
 }
 
 // Initialize the semaphores and cars, to move around the city.

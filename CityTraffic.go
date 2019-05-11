@@ -1,12 +1,12 @@
 package main
 
-/* func main() {
+func main() {
 
 	city := City{}
 	city.init()
 	city.createMap(11)
 	city.setSemaphores(4)
 	city.printMap()
-	city.run()
+	city.generateCars(4)
+	// city.run()
 }
-*/
