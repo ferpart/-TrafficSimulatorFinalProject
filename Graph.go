@@ -39,21 +39,25 @@ func Graph() {
 	centerW := Node{mCar: nil, "W", "N, E, S", false, false, false, false}
 
 	g.AddNode(&northF)
+	g.AddNode(&northS)
 	g.AddNode(&northA)
 	g.AddNode(&northB)
 	g.AddNode(&northC)
 
 	g.AddNode(&eastF)
+	g.AddNode(&eastS)
 	g.AddNode(&eastA)
 	g.AddNode(&eastB)
 	g.AddNode(&eastC)
 
 	g.AddNode(&southF)
+	g.AddNode(&southS)
 	g.AddNode(&southA)
 	g.AddNode(&southB)
 	g.AddNode(&southC)
 
 	g.AddNode(&westF)
+	g.AddNode(&westS)
 	g.AddNode(&westA)
 	g.AddNode(&westB)
 	g.AddNode(&westC)
@@ -65,19 +69,23 @@ func Graph() {
 
 	g.AddEdge(&northC, &northB)
 	g.AddEdge(&northC, &northA)
-	g.AddEdge(&northA, &centerN)
+	g.AddEdge(&northA, &northS)
+	g.AddEdge(&northS, &centerN)
 
 	g.AddEdge(&eastC, &eastB)
 	g.AddEdge(&eastB, &eastA)
-	g.AddEdge(&eastA, &centerE)
+	g.AddEdge(&eastA, &eastS)
+	g.AddEdge(&eastS, &centerE)
 
 	g.AddEdge(&southC, &southB)
 	g.AddEdge(&southB, &southA)
-	g.AddEdge(&southA, &centerS)
+	g.AddEdge(&southA, &southS)
+	g.AddEdge(&southS, &centerS)
 
 	g.AddEdge(&westC, &westB)
 	g.AddEdge(&westB, &westA)
-	g.AddEdge(&westA, &centerW)
+	g.AddEdge(&westA, &westS)
+	g.AddEdge(&westS, &centerW)
 
 	g.AddEdge(&centerN, &westF)
 	g.AddEdge(&centerN, &centerW)
