@@ -1,36 +1,37 @@
-package graph
+package main
 
 var g ItemGraph
 
+//Graph : main for this class
 func Graph() {
 	northF := Node{"", "N", "E, S, W", false, false, false, true}
 	northS := Node{"", "N", "", true, false, false, false}
 	northA := Node{"car", "N", "", false, false, true, false}
-	northB := Node{{"car", "N", "", false, false, true, false}
+	northB := Node{"car", "N", "", false, false, true, false}
 	northC := Node{"car", "N", "", false, false, true, false}
 
 	eastF := Node{"", "E", "N, S, W", false, false, false, true}
 	eastS := Node{"", "E", "", true, false, false, false}
-	eastA := Node{"car","E", "", false, false, true, false}
-	eastB := Node{"car","E", "", false, false, true, false}
-	eastC := Node{"car","E", "", false, false, true, false}
+	eastA := Node{"car", "E", "", false, false, true, false}
+	eastB := Node{"car", "E", "", false, false, true, false}
+	eastC := Node{"car", "E", "", false, false, true, false}
 
 	southF := Node{"", "S", "N, E, W", false, false, false, true}
 	southS := Node{"", "S", "", true, false, false, false}
-	southA := Node{"car","S", "", false, false, true, false}
-	southB := Node{"car","S", "", false, false, true, false}
-	southC := Node{"car","S", "", false, false, true, false}
+	southA := Node{"car", "S", "", false, false, true, false}
+	southB := Node{"car", "S", "", false, false, true, false}
+	southC := Node{"car", "S", "", false, false, true, false}
 
 	westF := Node{"", "W", "N, E, S", false, false, false, true}
 	westS := Node{"", "W", "", true, false, false, false}
-	westA := Node{"car","W", "", false, false, true, false}
-	westB := Node{"car","W", "", false, false, true, false}
-	westC := Node{"car","W", "", false, false, true, false}
+	westA := Node{"car", "W", "", false, false, true, false}
+	westB := Node{"car", "W", "", false, false, true, false}
+	westC := Node{"car", "W", "", false, false, true, false}
 
-	centerN := Node{"","N", "E, S, W",false, false, false, false}
-	centerE := Node{"","E", "N, S, W",false, false, false, false}
-	centerS := Node{"","S", "N, E, W",false, false, false, false}
-	centerW := Node{"","W", "N, E, S",false, false, false, false}
+	centerN := Node{"", "N", "E, S, W", false, false, false, false}
+	centerE := Node{"", "E", "N, S, W", false, false, false, false}
+	centerS := Node{"", "S", "N, E, W", false, false, false, false}
+	centerW := Node{"", "W", "N, E, S", false, false, false, false}
 
 	g.AddNode(&northF)
 	g.AddNode(&northA)
