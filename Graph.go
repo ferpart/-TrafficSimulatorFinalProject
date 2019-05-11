@@ -1,6 +1,7 @@
 package main
 
 var g ItemGraph
+var m map[string]int
 
 //Graph : initializer for this class
 func Graph() {
@@ -101,6 +102,37 @@ func Graph() {
 
 }
 
-func getItemGraph() ItemGraph {
-	return g
+func getItemGraph() *ItemGraph {
+	return &g
+}
+
+func getIndex(s string) int {
+	m = make(map[string]int)
+	m["northA"] = 0
+	m["northB"] = 1
+	m["northC"] = 2
+	m["northS"] = 3
+	m["northF"] = 4
+	m["eastA"] = 5
+	m["eastB"] = 6
+	m["eastC"] = 7
+	m["eastS"] = 8
+	m["eastF"] = 9
+	m["southA"] = 10
+	m["southB"] = 11
+	m["southC"] = 12
+	m["southS"] = 13
+	m["southF"] = 14
+	m["westA"] = 15
+	m["westB"] = 16
+	m["westC"] = 17
+	m["westS"] = 18
+	m["westF"] = 19
+	m["centerN"] = 20
+	m["centerE"] = 21
+	m["centerS"] = 22
+	m["centerW"] = 23
+
+	return m[s]
+
 }
