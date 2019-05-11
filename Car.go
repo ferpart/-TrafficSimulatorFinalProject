@@ -7,7 +7,8 @@ type Car struct {
 	currentPos     Point // Current point
 	destinationPos Point // Destination point
 	velocity       float32
-	cMap           *City
+	index          string
+	// cMap           *City
 }
 
 func (c *Car) move() {
