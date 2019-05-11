@@ -133,10 +133,7 @@ func getItemGraph() *ItemGraph {
 }
 
 func getIndex(s string) int {
-
-
 	return m[s]
-
 }
 
 func getPath (start, end *Node) string[]{
