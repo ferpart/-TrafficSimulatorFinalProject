@@ -15,6 +15,12 @@ type Queue struct {
 	Len   int   // Lenght of queue
 }
 
+// Initialize the variables inside Queue
+func (q *Queue) init() {
+	q.queue = make([]Car, 0)
+	q.Len = 0
+}
+
 // Adds a Car at the end of the queue.
 func (q *Queue) add(car Car) {
 	q.queue = append(q.queue, car)
