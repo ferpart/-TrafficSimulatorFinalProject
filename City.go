@@ -150,6 +150,7 @@ func (c *City) generateCars(cars int) {
 		indexNode := getIndex(nodeName)
 		c.index = nodeName
 		g.nodes[indexNode].setCar(&c)
+		go g.nodes[indexNode].getCar().move()
 	}
 }
 

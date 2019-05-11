@@ -1,5 +1,10 @@
 package main
 
+import (
+	"fmt"
+	"time"
+)
+
 // Car :
 // Creates a car instance.
 type Car struct {
@@ -12,7 +17,10 @@ type Car struct {
 }
 
 func (c *Car) move() {
-
+	for {
+		fmt.Printf("I'm car %s\n", c.index)
+		time.Sleep(1 * time.Second)
+	}
 	// is my velocity enough to move?
 	// is next position a semaphor?
 	// is it green or red? -> green: go || red: STOP ->v:0
