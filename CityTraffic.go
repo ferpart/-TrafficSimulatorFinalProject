@@ -1,4 +1,4 @@
-package main
+/* package main
 
 func main() {
 
@@ -9,3 +9,4 @@ func main() {
 	city.printMap()
 	city.run()
 }
+*/
