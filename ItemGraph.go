@@ -15,11 +15,11 @@ type Node struct {
 	isFinal       bool
 }
 
-func (n *Node) getCar() {
+func (n *Node) getCar() *Car {
 	return n.mCar
 }
 
-func (n *Node) setCar(mCar bool) {
+func (n *Node) setCar(mCar *Car) {
 	n.mCar = mCar
 }
 
@@ -48,7 +48,7 @@ func (n *Node) setHasCar(hasCar bool) {
 }
 
 func (n *Node) getisFinal() bool {
-	return isFinal
+	return n.isFinal
 }
 
 //ItemGraph : Node storage (graph).

@@ -85,10 +85,7 @@ func (c *City) printMap() {
 
 // Generates the Cars
 func (c *City) generateCars(cars int) {
-	//
-	for i := 0; i < cars; i++ {
-		c.carList = append(c.carList, Car{})
-	}
+
 }
 
 // Initialize the semaphores and cars, to move around the city.
