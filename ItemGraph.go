@@ -20,6 +20,7 @@ func (n *Node) getCar() *Car {
 }
 
 func (n *Node) setCar(mCar *Car) {
+	n.hasCar = true
 	n.mCar = mCar
 }
 
