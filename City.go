@@ -50,6 +50,7 @@ func (c *City) createMap(n int) {
 
 }
 
+// Set up n semaphores in the city
 func (c *City) setSemaphores(n int) {
 	c.semList = append(c.semList, Semaphore{id: 0, position: Point{4, 7}, mutex: c.mutex})
 	c.semList = append(c.semList, Semaphore{id: 1, position: Point{3, 4}, mutex: c.mutex})
@@ -82,11 +83,15 @@ func (c *City) printMap() {
 	fmt.Println()
 }
 
+// Generates the Cars
 func (c *City) generateCars(cars int) {
+	//
 	for i := 0; i < cars; i++ {
 		c.carList = append(c.carList, Car{})
 	}
 }
+
+// Initialize the semaphores and cars, to move around the city.
 func (c *City) run(cars int) {
 	c.generateCars(cars)
 	go c.semList[0].acquireTurn()

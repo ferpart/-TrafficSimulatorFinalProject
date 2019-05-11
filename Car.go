@@ -3,13 +3,20 @@ package main
 // Car :
 // Creates a car instance.
 type Car struct {
-	// id               int
-	originPos        Point // Origin point
-	currentPos       Point // Current point
-	destinationPos   Point // Destination point
-	velocity         float32
-	cMap             *City
-	currentSemaphore *Semaphore
+	originPos      Point // Origin point
+	currentPos     Point // Current point
+	destinationPos Point // Destination point
+	velocity       float32
+	cMap           *City
+	isCar          bool
+}
+
+func (c *Car) setIsCar(isCar bool) {
+	c.isCar = isCar
+}
+
+func (c *Car) getIsCar() bool {
+	return c.isCar
 }
 
 func (c *Car) move() {
