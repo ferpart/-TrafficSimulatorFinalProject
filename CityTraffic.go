@@ -7,7 +7,5 @@ func main() {
 	city.createMap(11)
 	city.setSemaphores(4)
 	city.printMap()
-	city.generateCars(4)
-	// city.run()
-
+	city.run(4)
 }

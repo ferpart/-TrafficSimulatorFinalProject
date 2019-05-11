@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"math/rand"
+	"strconv"
 	"sync"
 	"time"
 )
@@ -12,6 +13,7 @@ var pointsNorth map[Point]bool
 var pointsEast map[Point]bool
 var pointsSouth map[Point]bool
 var pointsWest map[Point]bool
+var pointToNode map[string]string
 
 // City :
 // Creates a city instance.
@@ -19,7 +21,6 @@ type City struct {
 	cMap    [][]int
 	mutex   *sync.Mutex
 	semList []Semaphore
-	// carList []Car
 }
 
 // Initializes variables inside instance.
@@ -61,6 +62,8 @@ func (c *City) createMap(n int) {
 	pointsSouth = make(map[Point]bool, 0)
 	pointsEast = make(map[Point]bool, 0)
 
+	pointToNode = make(map[string]string)
+
 	pointsNorth[Point{0, 4}] = false
 	pointsNorth[Point{1, 4}] = false
 	pointsNorth[Point{2, 4}] = false
@@ -77,6 +80,21 @@ func (c *City) createMap(n int) {
 	pointsEast[Point{4, 9}] = false
 	pointsEast[Point{4, 10}] = false
 
+	pointToNode["04"] = "northC"
+	pointToNode["14"] = "northB"
+	pointToNode["24"] = "northA"
+
+	pointToNode["60"] = "westC"
+	pointToNode["61"] = "westB"
+	pointToNode["62"] = "westA"
+
+	pointToNode["86"] = "southA"
+	pointToNode["96"] = "southB"
+	pointToNode["106"] = "southC"
+
+	pointToNode["48"] = "eastA"
+	pointToNode["49"] = "eastB"
+	pointToNode["410"] = "eastC"
 }
 
 // Set up n semaphores in the city
@@ -114,27 +132,28 @@ func (c *City) printMap() {
 
 // Generates the Cars
 func (c *City) generateCars(cars int) {
-	for i := 0; i < 4; i++ {
-		fmt.Println(getRandomPointStart())
+	listPoint := make([]Point, 0)
+	for i := 0; i < cars; i++ {
+		p, err := getRandomPointStart()
+		if err != nil {
+			continue
+		}
+		listPoint = append(listPoint, p)
 	}
-	/* Graph()
+
+	Graph()
 	g := getItemGraph()
-	g.nodes[0].setCar(&Car{currentPos: Point{x: 1, y: 2}})
-	g.nodes[1].setCar(&Car{currentPos: Point{x: 3, y: 4}})
-
-	g.nodes[0].setCar(&Car{currentPos: Point{x: 1, y: 2}})
-	g.nodes[1].setCar(&Car{currentPos: Point{x: 3, y: 4}})
-
-	g.nodes[0].setCar(&Car{currentPos: Point{x: 1, y: 2}})
-	g.nodes[1].setCar(&Car{currentPos: Point{x: 3, y: 4}})
-
-	g.nodes[0].setCar(&Car{currentPos: Point{x: 1, y: 2}})
-	g.nodes[1].setCar(&Car{currentPos: Point{x: 3, y: 4}})
-	fmt.Println(g.nodes[0].getCar())
-	fmt.Println(g.nodes[1].getCar()) */
-
+	for _, p := range listPoint {
+		c := Car{originPos: p}
+		pointString := strconv.Itoa(p.x) + strconv.Itoa(p.y)
+		nodeName := pointToNode[pointString]
+		indexNode := getIndex(nodeName)
+		c.index = nodeName
+		g.nodes[indexNode].setCar(&c)
+	}
 }
 
+// Get a random point from available positions
 func getRandomPointStart() (Point, error) {
 	r1 := rand.New(rand.NewSource(time.Now().UnixNano()))
 	i := r1.Intn(4)
@@ -178,11 +197,14 @@ func getRandomPointStart() (Point, error) {
 
 // Initialize the semaphores and cars, to move around the city.
 func (c *City) run(cars int) {
-	c.generateCars(cars)
+	// Semaphores begin
 	go c.semList[0].acquireTurn()
 	go c.semList[1].acquireTurn()
 	go c.semList[2].acquireTurn()
 	go c.semList[3].acquireTurn()
+
+	// Generate cars inside the graph
+	c.generateCars(cars)
 
 	// use group waits instead
 	time.Sleep(3600 * time.Second)

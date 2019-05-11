@@ -24,6 +24,10 @@ func (n *Node) setCar(mCar *Car) {
 	n.mCar = mCar
 }
 
+func (n *Node) getID() string {
+	return n.id
+}
+
 func (n *Node) getIsSemaphor() bool {
 	return n.isSemaphor
 }
