@@ -73,10 +73,10 @@ func Graph() {
 	g.AddNode(&centerS) // 22
 	g.AddNode(&centerW) // 23
 
-	g.edges = make(map[Node][]*Node)
+	g.edges = make(map[*Node]([]*Node))
 
 	g.AddEdge(&northC, &northB)
-	g.AddEdge(&northC, &northA)
+	g.AddEdge(&northB, &northA)
 	g.AddEdge(&northA, &northS)
 	g.AddEdge(&northS, &centerN)
 
@@ -104,8 +104,8 @@ func Graph() {
 	g.AddEdge(&centerS, &eastF)
 	g.AddEdge(&centerS, &centerE)
 
-	g.AddEdge(&centerS, &northF)
-	g.AddEdge(&centerS, &centerN)
+	g.AddEdge(&centerE, &northF)
+	g.AddEdge(&centerE, &centerN)
 
 	m = make(map[string]int)
 	m["northA"] = 0
@@ -143,17 +143,9 @@ func getIndex(s string) int {
 	return m[s]
 }
 
-<<<<<<< HEAD
-/*
-func getPath (start, end *Node) string[]{
-	list := g.edges[getIndex(start)]
-	for _, e := range list{
-		if
-=======
 func getPath(start, end string) {
 	for _, n := range g.nodes {
 		n.setVisited(false)
->>>>>>> not working
 	}
 
 	path := make([]string, 0)
@@ -170,7 +162,7 @@ func getPathL(start, end string, path *[]string) {
 	if strings.Compare(start, end) == 0 {
 		fmt.Println(*path)
 	} else {
-		for _, v := range g.edges[*g.nodes[getIndex(start)]] {
+		for _, v := range g.edges[g.nodes[getIndex(start)]] {
 			if v.getVisited() == false {
 				getPathL(v.getID(), end, path)
 			}
@@ -215,4 +207,3 @@ func getPathL(start, end string, path *[]string) {
 	} */
 
 }
-*/

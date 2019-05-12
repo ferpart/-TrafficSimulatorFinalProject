@@ -157,7 +157,7 @@ func (c *City) generateCars(cars int) {
 	/*
 		fmt.Println(l[0])
 		fmt.Println("southF") */
-	getPath("westA", "southF")
+	getPath("westC", "westF")
 	time.Sleep(5 * time.Second)
 }
 

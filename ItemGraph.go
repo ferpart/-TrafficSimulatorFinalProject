@@ -68,7 +68,7 @@ func (n *Node) getisFinal() bool {
 //ItemGraph : Node storage (graph).
 type ItemGraph struct {
 	nodes []*Node
-	edges map[Node][]*Node
+	edges map[*Node][]*Node
 	lock  sync.RWMutex
 }
 
@@ -82,11 +82,11 @@ func (g *ItemGraph) AddNode(n *Node) {
 //AddEdge : addes an edge to the graph
 func (g *ItemGraph) AddEdge(n1, n2 *Node) {
 	g.lock.Lock()
-	/* if g.edges == nil {
-		g.edges = make(map[Node][]*Node)
-	} */
-	g.edges[*n1] = append(g.edges[*n1], n2)
-	//g.edges[*n2] = append(g.edges[*n2], n1)
+	if g.edges == nil {
+		g.edges = make(map[*Node][]*Node)
+	}
+	g.edges[n1] = append(g.edges[n1], n2)
+	// g.edges[*n2] = append(g.edges[*n2], n1)
 
 	g.lock.Unlock()
 }
