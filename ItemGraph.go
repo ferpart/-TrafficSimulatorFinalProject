@@ -8,7 +8,6 @@ import (
 type Node struct {
 	mCar          *Car
 	id            string
-	permit        string
 	isSemaphor    bool
 	semaphorState bool
 	hasCar        bool
@@ -51,14 +50,6 @@ func (n *Node) setCar(mCar *Car) {
 	n.mCar = mCar
 }
 
-func (n *Node) getVisited() bool {
-	return n.visited
-}
-
-func (n *Node) setVisited(visited bool) {
-	n.visited = visited
-}
-
 func (n *Node) getID() string {
 	return n.id
 }
@@ -89,4 +80,12 @@ func (n *Node) setHasCar(hasCar bool) {
 
 func (n *Node) getisFinal() bool {
 	return n.isFinal
+}
+
+func (n *Node) getVisited() bool {
+	return n.visited
+}
+
+func (n *Node) setVisited(visited bool) {
+	n.visited = visited
 }

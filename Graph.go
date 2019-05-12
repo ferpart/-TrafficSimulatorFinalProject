@@ -15,38 +15,38 @@ func Graph() {
 }
 
 func createNodes() {
-	northF := Node{nil, "northF", "E, S, W", false, false, false, true, false}
+	northF := Node{nil, "northF", false, false, false, true, false}
 
-	northS := Node{nil, "northS", "all", false, false, false, false, false}
-	northA := Node{nil, "northA", "all", false, false, false, false, false}
-	northB := Node{nil, "northB", "all", false, false, false, false, false}
-	northC := Node{nil, "northC", "all", false, false, false, false, false}
+	northS := Node{nil, "northS", false, false, false, false, false}
+	northA := Node{nil, "northA", false, false, false, false, false}
+	northB := Node{nil, "northB", false, false, false, false, false}
+	northC := Node{nil, "northC", false, false, false, false, false}
 
-	eastF := Node{nil, "eastF", "N, S, W", false, false, false, true, false}
+	eastF := Node{nil, "eastF", false, false, false, true, false}
 
-	eastS := Node{nil, "eastS", "all", false, false, false, false, false}
-	eastA := Node{nil, "eastA", "all", false, false, false, false, false}
-	eastB := Node{nil, "eastB", "all", false, false, false, false, false}
-	eastC := Node{nil, "eastC", "all", false, false, false, false, false}
+	eastS := Node{nil, "eastS", false, false, false, false, false}
+	eastA := Node{nil, "eastA", false, false, false, false, false}
+	eastB := Node{nil, "eastB", false, false, false, false, false}
+	eastC := Node{nil, "eastC", false, false, false, false, false}
 
-	southF := Node{nil, "southF", "N, E, W", false, false, false, true, false}
+	southF := Node{nil, "southF", false, false, false, true, false}
 
-	southS := Node{nil, "southS", "all", false, false, false, false, false}
-	southA := Node{nil, "southA", "all", false, false, false, false, false}
-	southB := Node{nil, "southB", "all", false, false, false, false, false}
-	southC := Node{nil, "southC", "all", false, false, false, false, false}
+	southS := Node{nil, "southS", false, false, false, false, false}
+	southA := Node{nil, "southA", false, false, false, false, false}
+	southB := Node{nil, "southB", false, false, false, false, false}
+	southC := Node{nil, "southC", false, false, false, false, false}
 
-	westF := Node{nil, "westF", "N, E, S", false, false, false, true, false}
+	westF := Node{nil, "westF", false, false, false, true, false}
 
-	westS := Node{nil, "westS", "all", false, false, false, false, false}
-	westA := Node{nil, "westA", "all", false, false, false, false, false}
-	westB := Node{nil, "westB", "all", false, false, false, false, false}
-	westC := Node{nil, "westC", "all", false, false, false, false, false}
+	westS := Node{nil, "westS", false, false, false, false, false}
+	westA := Node{nil, "westA", false, false, false, false, false}
+	westB := Node{nil, "westB", false, false, false, false, false}
+	westC := Node{nil, "westC", false, false, false, false, false}
 
-	centerN := Node{nil, "centerN", "E, S, W", false, false, false, false, false}
-	centerE := Node{nil, "centerE", "N, S, W", false, false, false, false, false}
-	centerS := Node{nil, "centerS", "N, E, W", false, false, false, false, false}
-	centerW := Node{nil, "centerW", "N, E, S", false, false, false, false, false}
+	centerN := Node{nil, "centerN", false, false, false, false, false}
+	centerE := Node{nil, "centerE", false, false, false, false, false}
+	centerS := Node{nil, "centerS", false, false, false, false, false}
+	centerW := Node{nil, "centerW", false, false, false, false, false}
 
 	g.AddNode(&northA) // 0
 	g.AddNode(&northB) // 1
