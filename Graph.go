@@ -6,10 +6,15 @@ import (
 
 var g ItemGraph
 var m map[string]int
+var finalPath []string
 
 //Graph : initializer for this class
 func Graph() {
+	createNodes()
+	mapMaker()
+}
 
+func createNodes() {
 	northF := Node{nil, "northF", "E, S, W", false, false, false, true, false}
 
 	northS := Node{nil, "northS", "all", false, false, false, false, false}
@@ -105,8 +110,11 @@ func Graph() {
 
 	g.AddEdge(&centerE, &northF)
 	g.AddEdge(&centerE, &centerN)
+}
 
+func mapMaker() {
 	m = make(map[string]int)
+
 	m["northA"] = 0
 	m["northB"] = 1
 	m["northC"] = 2
@@ -131,21 +139,6 @@ func Graph() {
 	m["centerE"] = 21
 	m["centerS"] = 22
 	m["centerW"] = 23
-
-}
-
-func getItemGraph() *ItemGraph {
-	return &g
-}
-
-func getIndex(s string) int {
-	return m[s]
-}
-
-var finalPath []string
-
-func getFinalPath() []string {
-	return finalPath
 }
 
 func getPath(start, end string) []string {
@@ -155,7 +148,6 @@ func getPath(start, end string) []string {
 
 	path := make([]string, 0)
 
-	/*return*/
 	getPathL(start, end, &path)
 
 	return getFinalPath()
@@ -179,4 +171,16 @@ func getPathL(start, end string, path *[]string) {
 	*path = (*path)[:len(*path)-1]
 	g.nodes[getIndex(start)].setVisited(false)
 
+}
+
+func getFinalPath() []string {
+	return finalPath
+}
+
+func getItemGraph() *ItemGraph {
+	return &g
+}
+
+func getIndex(s string) int {
+	return m[s]
 }
