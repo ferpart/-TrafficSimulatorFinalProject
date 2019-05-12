@@ -1,5 +1,6 @@
 package main
 
+/*
 import (
 	"net/http"
 
@@ -56,3 +57,4 @@ func WhichSem(c *gin.Context) {
 		"message": "WhichSem not implemented yet",
 	})
 }
+*/

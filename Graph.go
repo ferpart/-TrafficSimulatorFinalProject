@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -143,7 +142,13 @@ func getIndex(s string) int {
 	return m[s]
 }
 
-func getPath(start, end string) {
+var finalPath []string
+
+func getFinalPath() []string {
+	return finalPath
+}
+
+func getPath(start, end string) []string {
 	for _, n := range g.nodes {
 		n.setVisited(false)
 	}
@@ -152,6 +157,8 @@ func getPath(start, end string) {
 
 	/*return*/
 	getPathL(start, end, &path)
+
+	return getFinalPath()
 }
 
 func getPathL(start, end string, path *[]string) {
@@ -160,7 +167,7 @@ func getPathL(start, end string, path *[]string) {
 	*path = append(*path, start)
 
 	if strings.Compare(start, end) == 0 {
-		fmt.Println(*path)
+		finalPath = *path
 	} else {
 		for _, v := range g.edges[g.nodes[getIndex(start)]] {
 			if v.getVisited() == false {
@@ -171,39 +178,5 @@ func getPathL(start, end string, path *[]string) {
 
 	*path = (*path)[:len(*path)-1]
 	g.nodes[getIndex(start)].setVisited(false)
-
-	/* if iterations > 7 {
-
-	}
-	list := g.edges[*g.nodes[getIndex(start)]]
-	for _, v := range list {
-		if strings.Compare(end, v.getID()) == 0 {
-			*listFin = append(*listFin, end)
-			return *listFin
-		}
-		*listFin = append(*listFin, v.getID())
-		return getPathL(v.getID(), end, listFin, iterations+1)
-
-	} */
-
-	/* node := g.nodes[getIndex(start)]
-	node.setVisited(true)
-	if len(g.edges[*node]) == 0 {
-		*listFin = *listFin[:len(listFin)-1]
-		return listFin
-	}
-	for _, v := range g.edges[*node] {
-		if string.compare(v.getID(), end) == 0 {
-			return *listFin
-		}
-		if v.getVisited {
-			continue
-		}
-		listTemp := getPath(v.getID(), end, g.edges[*v])
-		if len(listFin) == len(listTemp) {
-			continue
-		}
-
-	} */
 
 }
