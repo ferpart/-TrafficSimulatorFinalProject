@@ -143,15 +143,22 @@ func (c *City) generateCars(cars int) {
 
 	Graph()
 	g := getItemGraph()
+	l := make([]string, 0)
 	for _, p := range listPoint {
 		c := Car{originPos: p}
 		pointString := strconv.Itoa(p.x) + strconv.Itoa(p.y)
 		nodeName := pointToNode[pointString]
 		indexNode := getIndex(nodeName)
+		l = append(l, nodeName)
 		c.index = nodeName
 		g.nodes[indexNode].setCar(&c)
 		go g.nodes[indexNode].getCar().move()
 	}
+	/*
+		fmt.Println(l[0])
+		fmt.Println("southF") */
+	getPath("westC", "westF")
+	time.Sleep(5 * time.Second)
 }
 
 // Get a random point from available positions

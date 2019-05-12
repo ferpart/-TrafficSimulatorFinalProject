@@ -13,6 +13,7 @@ type Node struct {
 	semaphorState bool
 	hasCar        bool
 	isFinal       bool
+	visited       bool
 }
 
 func (n *Node) getCar() *Car {
@@ -22,6 +23,14 @@ func (n *Node) getCar() *Car {
 func (n *Node) setCar(mCar *Car) {
 	n.hasCar = true
 	n.mCar = mCar
+}
+
+func (n *Node) getVisited() bool {
+	return n.visited
+}
+
+func (n *Node) setVisited(visited bool) {
+	n.visited = visited
 }
 
 func (n *Node) getID() string {
@@ -59,7 +68,7 @@ func (n *Node) getisFinal() bool {
 //ItemGraph : Node storage (graph).
 type ItemGraph struct {
 	nodes []*Node
-	edges map[Node][]*Node
+	edges map[*Node][]*Node
 	lock  sync.RWMutex
 }
 
@@ -74,10 +83,10 @@ func (g *ItemGraph) AddNode(n *Node) {
 func (g *ItemGraph) AddEdge(n1, n2 *Node) {
 	g.lock.Lock()
 	if g.edges == nil {
-		g.edges = make(map[Node][]*Node)
+		g.edges = make(map[*Node][]*Node)
 	}
-	g.edges[*n1] = append(g.edges[*n1], n2)
-	g.edges[*n2] = append(g.edges[*n2], n1)
+	g.edges[n1] = append(g.edges[n1], n2)
+	// g.edges[*n2] = append(g.edges[*n2], n1)
 
 	g.lock.Unlock()
 }
