@@ -33,6 +33,7 @@ func main() {
 	router.Run(":3000")
 }
 
+// CityHandler : algo
 func CityHandler(c *gin.Context) {
 	c.Header("Content-Type", "application/json")
 	c.JSON(http.StatusOK, gin.H{
@@ -40,6 +41,7 @@ func CityHandler(c *gin.Context) {
 	})
 }
 
+// WhichCar : algo
 func WhichCar(c *gin.Context) {
 	c.Header("Content-Type", "application/json")
 	c.JSON(http.StatusOK, gin.H{
@@ -47,6 +49,7 @@ func WhichCar(c *gin.Context) {
 	})
 }
 
+// WhichSem : algo
 func WhichSem(c *gin.Context) {
 	c.Header("Content-Type", "application/json")
 	c.JSON(http.StatusOK, gin.H{
