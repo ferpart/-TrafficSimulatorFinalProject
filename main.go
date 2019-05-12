@@ -1,6 +1,13 @@
 package main
 
-/* func main() {
+import (
+	"net/http"
+
+	"github.com/gin-gonic/contrib/static"
+	"github.com/gin-gonic/gin"
+)
+
+func main() {
 	// Set the router as the default one shipped with Gin
 	router := gin.Default()
 
@@ -17,6 +24,32 @@ package main
 		})
 	}
 
+	// Defining the API endpoints
+	api.GET("/cities", CityHandler)
+	api.POST("/cities/car/:carID", WhichCar)
+	api.POST("/cities/sem/:semID", WhichSem)
+
 	// Start and run the server
 	router.Run(":3000")
-} */
+}
+
+func CityHandler(c *gin.Context) {
+	c.Header("Content-Type", "application/json")
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Cities Handler not implemented yet",
+	})
+}
+
+func WhichCar(c *gin.Context) {
+	c.Header("Content-Type", "application/json")
+	c.JSON(http.StatusOK, gin.H{
+		"message": "WhichCar not implemented yet",
+	})
+}
+
+func WhichSem(c *gin.Context) {
+	c.Header("Content-Type", "application/json")
+	c.JSON(http.StatusOK, gin.H{
+		"message": "WhichSem not implemented yet",
+	})
+}

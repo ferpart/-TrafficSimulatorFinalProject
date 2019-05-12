@@ -1,6 +1,6 @@
 package main
 
-func main() {
+/* func main() {
 
 	city := City{}
 	city.init()
@@ -9,3 +9,4 @@ func main() {
 	city.printMap()
 	city.run(4)
 }
+*/
