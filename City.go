@@ -98,7 +98,7 @@ func (c *City) createMap(n int) {
 }
 
 // Set up n semaphores in the city
-func (c *City) setSemaphores(n int) {
+func (c *City) setSemaphores() {
 	c.semList = append(c.semList, Semaphore{id: 0, position: Point{4, 7}, mutex: c.mutex})
 	c.semList = append(c.semList, Semaphore{id: 1, position: Point{3, 4}, mutex: c.mutex})
 	c.semList = append(c.semList, Semaphore{id: 2, position: Point{6, 3}, mutex: c.mutex})
@@ -152,13 +152,9 @@ func (c *City) generateCars(cars int) {
 		l = append(l, nodeName)
 		c.index = nodeName
 		g.nodes[indexNode].setCar(&c)
-		go g.nodes[indexNode].getCar().move()
+		// should make this in a clever way
+		go g.nodes[indexNode].getCar().move(getPath(nodeName, "westF"))
 	}
-	/*
-		fmt.Println(l[0])
-		fmt.Println("southF") */
-	fmt.Println(getPath("westC", "westF"))
-	time.Sleep(5 * time.Second)
 }
 
 // Get a random point from available positions

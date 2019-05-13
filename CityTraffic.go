@@ -5,6 +5,6 @@ func main() {
 	city := City{}
 	city.init()
 	city.createMap(11)
-	city.setSemaphores(4)
-	city.run(4)
+	city.setSemaphores()
+	city.run(1)
 }
