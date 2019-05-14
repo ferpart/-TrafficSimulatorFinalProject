@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"os"
 	"time"
 
@@ -13,21 +14,25 @@ const screenHeight = 550
 
 var listCars map[string]Position
 var carsInMap map[int]Position
+var colorCar map[int]uint8
+var s1 rand.Source
 
 type Position struct {
 	x, y, w, h int32
 }
 
-/* func main() {
-	GUI()
-} */
-
 func GUI(cars []Car) {
 	listCars = make(map[string]Position)
 	carsInMap = make(map[int]Position)
+	colorCar = make(map[int]uint8)
 
-	
-	
+	s1 = rand.NewSource(time.Now().UnixNano())
+	for i := 0; i < len(cars)*3; i = i + 3 {
+		colorCar[i] = getRandColor()
+		colorCar[i+1] = getRandColor()
+		colorCar[i+2] = getRandColor()
+	}
+
 	// W - E
 	listCars["60"] = Position{x: 20, y: 310, w: 20, h: 10}
 	listCars["61"] = Position{x: 70, y: 310, w: 20, h: 10}
@@ -136,23 +141,39 @@ func GUI(cars []Car) {
 
 		// Semaphores
 		// 1st quad
-		renderer.SetDrawColor(0, 0, 0, 255)
+		if semaphoresInMap[1] == true {
+			renderer.SetDrawColor(210, 255, 186, 255)
+		} else {
+			renderer.SetDrawColor(255, 0, 0, 255)
+		}
 		renderer.FillRect(&sdl.Rect{350, 200, 10, 35})
 
 		// 2nd quad
-		renderer.SetDrawColor(0, 0, 0, 255)
+		if semaphoresInMap[0] == true {
+			renderer.SetDrawColor(210, 255, 186, 255)
+		} else {
+			renderer.SetDrawColor(255, 0, 0, 255)
+		}
 		renderer.FillRect(&sdl.Rect{200, 190, 35, 10})
 
 		// 3rd quad
-		renderer.SetDrawColor(0, 0, 0, 255)
+		if semaphoresInMap[3] == true {
+			renderer.SetDrawColor(210, 255, 186, 255)
+		} else {
+			renderer.SetDrawColor(255, 0, 0, 255)
+		}
 		renderer.FillRect(&sdl.Rect{190, 315, 10, 35})
 
 		// 4th quad
-		renderer.SetDrawColor(0, 0, 0, 255)
+		if semaphoresInMap[2] == true {
+			renderer.SetDrawColor(210, 255, 186, 255)
+		} else {
+			renderer.SetDrawColor(255, 0, 0, 255)
+		}
 		renderer.FillRect(&sdl.Rect{315, 350, 35, 10})
 
-		renderer.SetDrawColor(0, 0, 255, 255)
-		for _, v := range carsInMap {
+		for i, v := range carsInMap {
+			renderer.SetDrawColor(colorCar[i], colorCar[i+1], colorCar[i+2], 255)
 			renderer.FillRect(&sdl.Rect{v.x, v.y, v.w, v.h})
 		}
 
@@ -173,4 +194,9 @@ func GUI(cars []Car) {
 	window.Destroy()
 
 	sdl.Quit()
+}
+
+func getRandColor() uint8 {
+	r1 := rand.New(s1)
+	return uint8(r1.Intn(255))
 }

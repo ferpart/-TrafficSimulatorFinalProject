@@ -22,6 +22,7 @@ var finishPointFromEast map[string]bool
 var finishPointFromSouth map[string]bool
 var finishPointFromWest map[string]bool
 var getMatrixPos map[string]string
+var semaphoresInMap map[int]bool
 
 // City :
 // Creates a city instance.
@@ -157,7 +158,8 @@ func (c *City) createMap(n int) {
 	getMatrixPos["centerE"] = "46"
 	getMatrixPos["centerS"] = "66"
 	getMatrixPos["centerW"] = "64"
-	
+
+	semaphoresInMap = make(map[int]bool)
 }
 
 // Set up n semaphores in the city
@@ -317,10 +319,10 @@ func (c *City) run(cars int) {
 		return
 	}
 
-	go c.semList[0].acquireTurn("northS")
-	go c.semList[1].acquireTurn("eastS")
-	go c.semList[2].acquireTurn("southS")
-	go c.semList[3].acquireTurn("westS")
+	go c.semList[0].acquireTurn(0, "northS")
+	go c.semList[1].acquireTurn(1, "eastS")
+	go c.semList[2].acquireTurn(2, "southS")
+	go c.semList[3].acquireTurn(3, "westS")
 
 	// Generate cars inside the graph
 	GUI(c.generateCars(cars))

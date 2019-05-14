@@ -17,7 +17,7 @@ type Car struct {
 
 func (c *Car) move(id int, path []string, vel float32) {
 	lastNode := g.nodes[getIndex(path[len(path)-1])]
-	// fmt.Println(path)
+	fmt.Println(path)
 	for {
 		// is my velocity enough to move?
 		if len(path) <= 1 {
@@ -49,7 +49,7 @@ func (c *Car) move(id int, path []string, vel float32) {
 
 				// move
 				g.lock.Lock()
-				fmt.Printf("|%d| [%s] --> [%s] \t [%v]\n", id, path[0], path[1], path)
+				// fmt.Printf("|%d| [%s] --> [%s] \t [%v]\n", id, path[0], path[1], path)
 				currentNode.setHasCar(false)
 				nextNode.setHasCar(true)
 				carsInMap[id] = listCars[getMatrixPos[path[1]]]
@@ -64,7 +64,7 @@ func (c *Car) move(id int, path []string, vel float32) {
 				}
 				// move
 				g.lock.Lock()
-				fmt.Printf("|%d| [%s] --> [%s] \t [%v]\n", id, path[0], path[1], path)
+				// fmt.Printf("|%d| [%s] --> [%s] \t [%v]\n", id, path[0], path[1], path)
 				currentNode.setHasCar(false)
 				nextNode.setHasCar(true)
 				carsInMap[id] = listCars[getMatrixPos[path[1]]]
