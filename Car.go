@@ -8,16 +8,16 @@ import (
 // Car :
 // Creates a car instance.
 type Car struct {
-	originPos      Point // Origin point
-	currentPos     Point // Current point
-	destinationPos Point // Destination point
-	velocity       float32
-	index          string
+	id        int
+	originPos string // Origin point
+	velocity  float32
+	index     string
 	// cMap           *City
 }
 
 func (c *Car) move(id int, path []string, vel float32) {
 	lastNode := g.nodes[getIndex(path[len(path)-1])]
+	// fmt.Println(path)
 	for {
 		// is my velocity enough to move?
 		if len(path) <= 1 {

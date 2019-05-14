@@ -186,8 +186,9 @@ func (c *City) generateCars(cars int) {
 	r1 := rand.New(rand.NewSource(time.Now().UnixNano()))
 
 	for i, p := range listPoint {
-		c := Car{originPos: p}
+		c := Car{id: i}
 		pointString := strconv.Itoa(p.x) + strconv.Itoa(p.y)
+		c.originPos = pointString
 		nodeName := pointToNode[pointString]
 		indexNode := getIndex(nodeName)
 		l = append(l, nodeName)
