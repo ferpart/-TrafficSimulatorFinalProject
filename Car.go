@@ -23,6 +23,7 @@ func (c *Car) move(id int, path []string, vel float32) {
 		if len(path) <= 1 {
 			g.lock.Lock()
 			lastNode.setHasCar(false)
+			carsInMap[id] = Position{600, 600, 1, 1}
 			g.lock.Unlock()
 			fmt.Printf("|%d| [%s] finished\n", id, path[0])
 			return
@@ -51,8 +52,8 @@ func (c *Car) move(id int, path []string, vel float32) {
 				fmt.Printf("|%d| [%s] --> [%s] \t [%v]\n", id, path[0], path[1], path)
 				currentNode.setHasCar(false)
 				nextNode.setHasCar(true)
-				path = path[1:]
 				carsInMap[id] = listCars[getMatrixPos[path[1]]]
+				path = path[1:]
 				g.lock.Unlock()
 				c.velocity = 0
 			} else {
@@ -66,8 +67,8 @@ func (c *Car) move(id int, path []string, vel float32) {
 				fmt.Printf("|%d| [%s] --> [%s] \t [%v]\n", id, path[0], path[1], path)
 				currentNode.setHasCar(false)
 				nextNode.setHasCar(true)
-				path = path[1:]
 				carsInMap[id] = listCars[getMatrixPos[path[1]]]
+				path = path[1:]
 				g.lock.Unlock()
 				c.velocity = 0
 			}
