@@ -41,11 +41,12 @@ City Traffic Simulator has a ?? based architecture. It consists of ## .go files 
 ### City Traffic Simulator prerequisites:
 - Have Golang installed.
 - Run on a bash terminal.
+- Clone the repo inside $GOPATH/src/
 
 ### City Traffic Simulator game rules:
 - 
 
 ### To Compile City Traffic Simulator:
 ```
-    $ make
+    $ make run
 ```
