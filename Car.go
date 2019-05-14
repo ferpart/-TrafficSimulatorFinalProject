@@ -17,9 +17,8 @@ type Car struct {
 
 func (c *Car) move(id int, path []string, vel float32) {
 	lastNode := g.nodes[getIndex(path[len(path)-1])]
-	fmt.Println(path)
+	fmt.Printf("|%d| %v", id, path)
 	for {
-		// is my velocity enough to move?
 		if len(path) <= 1 {
 			g.lock.Lock()
 			lastNode.setHasCar(false)
@@ -28,16 +27,16 @@ func (c *Car) move(id int, path []string, vel float32) {
 			fmt.Printf("|%d| [%s] finished\n", id, path[0])
 			return
 		}
-		// fmt.Printf("vel: %f, c.vel: %f\n", vel, c.velocity)
+		// is my velocity enough to move?
 		if c.velocity >= 1 {
 			g.lock.Lock()
 			currentNode := g.nodes[getIndex(path[0])]
 			nextNode := g.nodes[getIndex(path[1])]
 			g.lock.Unlock()
 			// is next position a semaphor?
-			if nextNode.getIsSemaphor() {
+			if currentNode.getIsSemaphor() {
 				// semaphor is in red -> semaphorState = false
-				if !nextNode.getSemaphorState() {
+				if !currentNode.getSemaphorState() {
 					c.velocity = 0
 					continue
 				}
