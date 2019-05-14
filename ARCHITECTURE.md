@@ -36,8 +36,15 @@ City Traffic Simulator has a ?? based architecture. It consists of ## .go files 
 - Represents a two dimentional point.
 
 
-**************************
+***************************
+### Graph
 
+The following graph was used for the city structure.
+
+![City Graph](graph.png)
+
+
+***************************
 ### Libraries
 - SDL 2.0 (Installation notes on [CITY_TRAFFIC.md](CITY_TRAFFIC.md))
 
