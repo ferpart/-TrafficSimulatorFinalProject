@@ -147,30 +147,59 @@ func getPath(start, end string) []string {
 	}
 
 	path := make([]string, 0)
-
-	getPathL(start, end, &path)
+	finalPath = path
+	getPathL(start, start, end, &path)
 
 	return getFinalPath()
 }
 
-func getPathL(start, end string, path *[]string) {
+func getPathL(staticStart, start, end string, path *[]string) {
 
 	g.nodes[getIndex(start)].setVisited(true)
 	*path = append(*path, start)
 
 	if strings.Compare(start, end) == 0 {
 		finalPath = *path
-	} else {
-		for _, v := range g.edges[g.nodes[getIndex(start)]] {
-			if v.getVisited() == false {
-				getPathL(v.getID(), end, path)
-			}
+		return
+	}
+	for _, v := range g.edges[g.nodes[getIndex(start)]] {
+		if v.getVisited() == false && validPath(staticStart, v.getID()) {
+
+			getPathL(staticStart, v.getID(), end, path)
+
 		}
 	}
 
 	*path = (*path)[:len(*path)-1]
 	g.nodes[getIndex(start)].setVisited(false)
 
+}
+
+func validPath(start, end string) bool {
+	startL := strings.SplitN(start, "", 2)
+	switch startL[0] {
+	case "n":
+		if strings.Compare(end, "centerE") == 0 {
+			return false
+		}
+		break
+	case "e":
+		if strings.Compare(end, "centerS") == 0 {
+			return false
+		}
+		break
+	case "s":
+		if strings.Compare(end, "centerW") == 0 {
+			return false
+		}
+		break
+	case "w":
+		if strings.Compare(end, "centerN") == 0 {
+			return false
+		}
+		break
+	}
+	return true
 }
 
 func getFinalPath() []string {
