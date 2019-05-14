@@ -147,8 +147,9 @@ func GUI(cars []Car) {
 		renderer.FillRect(&sdl.Rect{315, 350, 35, 10})
 
 		renderer.SetDrawColor(0, 0, 255, 255)
-		for _, v := range listCars {
-			renderer.FillRect(&sdl.Rect{v.x, v.y, v.w, v.h})
+		for _, v := range cars {
+			pos := listCars[v.originPos]
+			renderer.FillRect(&sdl.Rect{pos.x, pos.y, pos.w, pos.h})
 		}
 
 		// The rects have been drawn, now it is time to tell the renderer to show

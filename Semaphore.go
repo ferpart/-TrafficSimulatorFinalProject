@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	"sync"
 	"time"
 )
@@ -19,7 +19,7 @@ func (s *Semaphore) acquireTurn(name string) {
 	semaphoreNode := g.nodes[getIndex(name)]
 	for {
 		s.mutex.Lock()
-		fmt.Printf("\t\t==== SEMAPHORE %s ====\n", name)
+		//fmt.Printf("\t\t==== SEMAPHORE %s ====\n", name)
 		semaphoreNode.setSemaphorState(true)
 		time.Sleep(2 * time.Second)
 		s.mutex.Unlock()
