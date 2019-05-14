@@ -99,7 +99,7 @@ How to run
 ```bash
 # -ncars=num where num = number of cars (from 1 up to 12)
 # replace foldername with the name of the folder in which the go file was built
-foldername.exe [-ncars=4]
+city-traffic.exe [-ncars=4]
 ```
 
 License
