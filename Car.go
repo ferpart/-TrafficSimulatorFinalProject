@@ -17,7 +17,7 @@ type Car struct {
 
 func (c *Car) move(id int, path []string, vel float32) {
 	lastNode := g.nodes[getIndex(path[len(path)-1])]
-	fmt.Printf("|%d| %v", id, path)
+	fmt.Printf("|%d| %v\n", id, path)
 	for {
 		if len(path) <= 1 {
 			g.lock.Lock()

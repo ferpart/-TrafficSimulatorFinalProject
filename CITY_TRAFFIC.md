@@ -65,10 +65,12 @@ install SDL2 via [Homebrew](http://brew.sh) like so:\
 Compilation
 -----------
 
+__*Clone repository into the $GOPATH/src/ folder*__
+
 ### On __Linux__ or __MacOs__
 
 ```bash
-# To compile the go project
+# To compile the go proyect
 make
 
 # To remove all files (including executable) created after compilation.
