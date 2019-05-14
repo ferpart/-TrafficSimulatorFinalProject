@@ -17,17 +17,19 @@ type Car struct {
 
 func (c *Car) move(id int, path []string, vel float32) {
 	lastNode := g.nodes[getIndex(path[len(path)-1])]
-	fmt.Printf("|%d| %v\n", id, path)
+	copyPath := path
 	for {
 		if len(path) <= 1 {
 			g.lock.Lock()
 			lastNode.setHasCar(false)
 			carsInMap[id] = Position{600, 600, 1, 1}
 			g.lock.Unlock()
-			fmt.Printf("|%d| [%s] finished\n", id, path[0])
+			fmt.Printf("|%d| finished\n", id)
+			fmt.Printf("|%d| %v\n", id, copyPath)
 			return
 		}
 		// is my velocity enough to move?
+		fmt.Printf("|%d| velocity: %f\n", id, c.velocity)
 		if c.velocity >= 1 {
 			g.lock.Lock()
 			currentNode := g.nodes[getIndex(path[0])]
