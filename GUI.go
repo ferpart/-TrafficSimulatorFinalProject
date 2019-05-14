@@ -12,6 +12,7 @@ const screenWidth = 550
 const screenHeight = 550
 
 var listCars map[string]Position
+var carsInMap map[int]Position
 
 type Position struct {
 	x, y, w, h int32
@@ -22,11 +23,11 @@ type Position struct {
 } */
 
 func GUI(cars []Car) {
-	fmt.Println("LIST OF CARS")
-	for _, v := range cars {
-		fmt.Printf("[%d] Car: position-> (%s)\n", v.id, v.originPos)
-	}
 	listCars = make(map[string]Position)
+	carsInMap = make(map[int]Position)
+
+	
+	
 	// W - E
 	listCars["60"] = Position{x: 20, y: 310, w: 20, h: 10}
 	listCars["61"] = Position{x: 70, y: 310, w: 20, h: 10}
@@ -62,6 +63,10 @@ func GUI(cars []Car) {
 	listCars["46"] = Position{x: 310, y: 230, w: 20, h: 10}
 	listCars["44"] = Position{x: 210, y: 230, w: 20, h: 10}
 	listCars["43"] = Position{x: 160, y: 230, w: 20, h: 10}
+
+	for i, v := range cars {
+		carsInMap[i] = listCars[v.originPos]
+	}
 
 	err := sdl.Init(sdl.INIT_EVERYTHING)
 	if err != nil {
@@ -147,9 +152,8 @@ func GUI(cars []Car) {
 		renderer.FillRect(&sdl.Rect{315, 350, 35, 10})
 
 		renderer.SetDrawColor(0, 0, 255, 255)
-		for _, v := range cars {
-			pos := listCars[v.originPos]
-			renderer.FillRect(&sdl.Rect{pos.x, pos.y, pos.w, pos.h})
+		for _, v := range carsInMap {
+			renderer.FillRect(&sdl.Rect{v.x, v.y, v.w, v.h})
 		}
 
 		// The rects have been drawn, now it is time to tell the renderer to show

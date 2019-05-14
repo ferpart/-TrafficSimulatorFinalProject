@@ -21,6 +21,7 @@ var finishPointFromNorth map[string]bool
 var finishPointFromEast map[string]bool
 var finishPointFromSouth map[string]bool
 var finishPointFromWest map[string]bool
+var getMatrixPos map[string]string
 
 // City :
 // Creates a city instance.
@@ -130,6 +131,33 @@ func (c *City) createMap(n int) {
 	pointToNode["48"] = "eastA"
 	pointToNode["49"] = "eastB"
 	pointToNode["410"] = "eastC"
+
+	getMatrixPos = make(map[string]string)
+	getMatrixPos["northA"] = "24"
+	getMatrixPos["northB"] = "14"
+	getMatrixPos["northC"] = "04"
+	getMatrixPos["northS"] = "34"
+	getMatrixPos["northF"] = "36"
+	getMatrixPos["eastA"] = "48"
+	getMatrixPos["eastB"] = "49"
+	getMatrixPos["eastC"] = "410"
+	getMatrixPos["eastS"] = "47"
+	getMatrixPos["eastF"] = "67"
+	getMatrixPos["southA"] = "86"
+	getMatrixPos["southB"] = "96"
+	getMatrixPos["southC"] = "106"
+	getMatrixPos["southS"] = "76"
+	getMatrixPos["southF"] = "74"
+	getMatrixPos["westA"] = "62"
+	getMatrixPos["westB"] = "61"
+	getMatrixPos["westC"] = "60"
+	getMatrixPos["westS"] = "63"
+	getMatrixPos["westF"] = "43"
+	getMatrixPos["centerN"] = "44"
+	getMatrixPos["centerE"] = "46"
+	getMatrixPos["centerS"] = "66"
+	getMatrixPos["centerW"] = "64"
+	
 }
 
 // Set up n semaphores in the city

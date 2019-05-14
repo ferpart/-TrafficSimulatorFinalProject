@@ -1,7 +1,7 @@
 package main
 
 import (
-	//"fmt"
+	"fmt"
 	"time"
 )
 
@@ -24,7 +24,7 @@ func (c *Car) move(id int, path []string, vel float32) {
 			g.lock.Lock()
 			lastNode.setHasCar(false)
 			g.lock.Unlock()
-			//fmt.Printf("|%d| [%s] finished\n", id, path[0])
+			fmt.Printf("|%d| [%s] finished\n", id, path[0])
 			return
 		}
 		// fmt.Printf("vel: %f, c.vel: %f\n", vel, c.velocity)
@@ -48,10 +48,11 @@ func (c *Car) move(id int, path []string, vel float32) {
 
 				// move
 				g.lock.Lock()
-				//fmt.Printf("|%d| [%s] --> [%s] \t [%v]\n", id, path[0], path[1], path)
+				fmt.Printf("|%d| [%s] --> [%s] \t [%v]\n", id, path[0], path[1], path)
 				currentNode.setHasCar(false)
 				nextNode.setHasCar(true)
 				path = path[1:]
+				carsInMap[id] = listCars[getMatrixPos[path[1]]]
 				g.lock.Unlock()
 				c.velocity = 0
 			} else {
@@ -62,10 +63,11 @@ func (c *Car) move(id int, path []string, vel float32) {
 				}
 				// move
 				g.lock.Lock()
-				//fmt.Printf("|%d| [%s] --> [%s] \t [%v]\n", id, path[0], path[1], path)
+				fmt.Printf("|%d| [%s] --> [%s] \t [%v]\n", id, path[0], path[1], path)
 				currentNode.setHasCar(false)
 				nextNode.setHasCar(true)
 				path = path[1:]
+				carsInMap[id] = listCars[getMatrixPos[path[1]]]
 				g.lock.Unlock()
 				c.velocity = 0
 			}
