@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math/rand"
 	"strconv"
+	"strings"
 	"sync"
 	"time"
 )
@@ -16,6 +17,10 @@ var pointsWest map[Point]bool
 var pointToNode map[string]string
 var wg sync.WaitGroup
 var velocitiesDict map[int]float32
+var finishPointFromNorth map[string]bool
+var finishPointFromEast map[string]bool
+var finishPointFromSouth map[string]bool
+var finishPointFromWest map[string]bool
 
 // City :
 // Creates a city instance.
@@ -39,6 +44,27 @@ func (c *City) createMap(n int) {
 	velocitiesDict[1] = 0.50
 	velocitiesDict[2] = 0.15
 	velocitiesDict[3] = 0.20
+
+	finishPointFromNorth = make(map[string]bool)
+	finishPointFromEast = make(map[string]bool)
+	finishPointFromSouth = make(map[string]bool)
+	finishPointFromWest = make(map[string]bool)
+
+	finishPointFromNorth["westF"] = false
+	finishPointFromNorth["southF"] = false
+	finishPointFromNorth["eastF"] = false
+
+	finishPointFromEast["northF"] = false
+	finishPointFromEast["westF"] = false
+	finishPointFromEast["southF"] = false
+
+	finishPointFromSouth["northF"] = false
+	finishPointFromSouth["westF"] = false
+	finishPointFromSouth["eastF"] = false
+
+	finishPointFromWest["northF"] = false
+	finishPointFromWest["eastF"] = false
+	finishPointFromWest["southF"] = false
 
 	c.cMap = make([][]int, n, n)
 	for i := range c.cMap {
@@ -108,11 +134,15 @@ func (c *City) createMap(n int) {
 
 // Set up n semaphores in the city
 func (c *City) setSemaphores() {
+	g.nodes[getIndex("northS")].setIsSemaphor(true)
+	g.nodes[getIndex("eastS")].setIsSemaphor(true)
+	g.nodes[getIndex("southS")].setIsSemaphor(true)
+	g.nodes[getIndex("westS")].setIsSemaphor(true)
+
 	c.semList = append(c.semList, Semaphore{id: 0, position: Point{4, 7}, mutex: c.mutex})
 	c.semList = append(c.semList, Semaphore{id: 1, position: Point{3, 4}, mutex: c.mutex})
 	c.semList = append(c.semList, Semaphore{id: 2, position: Point{6, 3}, mutex: c.mutex})
 	c.semList = append(c.semList, Semaphore{id: 3, position: Point{7, 6}, mutex: c.mutex})
-	// set semaphores in g.nodes[indexSemaphore].issemaphore => true
 	c.cMap[4][7] = 2
 	c.cMap[3][4] = 2
 	c.cMap[6][3] = 2
@@ -163,9 +193,48 @@ func (c *City) generateCars(cars int) {
 		l = append(l, nodeName)
 		c.index = nodeName
 		g.nodes[indexNode].setCar(&c)
-		go g.nodes[indexNode].getCar().move(i, getPath(nodeName, "westF"), velocitiesDict[r1.Intn(4)])
+
+		destinity, err := getDestinity(nodeName)
+		for err != nil {
+			destinity, err = getDestinity(nodeName)
+		}
+		fmt.Printf("|%d| FROM [%s] ->  TO [%s]\n", i, nodeName, destinity)
+		go g.nodes[indexNode].getCar().move(i, getPath(nodeName, destinity), velocitiesDict[r1.Intn(4)])
 	}
 
+}
+
+func getDestinity(origin string) (string, error) {
+	if strings.HasPrefix(origin, "north") {
+		for i, v := range finishPointFromNorth {
+			if !v {
+				finishPointFromNorth[i] = true
+				return i, nil
+			}
+		}
+	} else if strings.HasPrefix(origin, "east") {
+		for i, v := range finishPointFromEast {
+			if !v {
+				finishPointFromEast[i] = true
+				return i, nil
+			}
+		}
+	} else if strings.HasPrefix(origin, "south") {
+		for i, v := range finishPointFromSouth {
+			if !v {
+				finishPointFromSouth[i] = true
+				return i, nil
+			}
+		}
+	} else if strings.HasPrefix(origin, "west") {
+		for i, v := range finishPointFromWest {
+			if !v {
+				finishPointFromWest[i] = true
+				return i, nil
+			}
+		}
+	}
+	return "", errors.New("couldn't find a space available")
 }
 
 // Get a random point from available positions
@@ -214,12 +283,14 @@ func (c *City) run(cars int) {
 	// Semaphores begin
 	// wg.Add(4)
 	if cars > 12 || cars < 1 {
-		fmt.Println("chotto matte ... you can only 0 > cars > 13")
+		fmt.Println("chotto matte ... you can only have 0 > cars > 13")
+		return
 	}
-	go c.semList[0].acquireTurn()
-	go c.semList[1].acquireTurn()
-	go c.semList[2].acquireTurn()
-	go c.semList[3].acquireTurn()
+
+	go c.semList[0].acquireTurn("northS")
+	go c.semList[1].acquireTurn("eastS")
+	go c.semList[2].acquireTurn("southS")
+	go c.semList[3].acquireTurn("westS")
 
 	// Generate cars inside the graph
 	c.generateCars(cars)

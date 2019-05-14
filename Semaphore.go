@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"sync"
 	"time"
 )
@@ -14,12 +15,15 @@ type Semaphore struct {
 	mutex    *sync.Mutex
 }
 
-func (s *Semaphore) acquireTurn() {
+func (s *Semaphore) acquireTurn(name string) {
+	semaphoreNode := g.nodes[getIndex(name)]
 	for {
 		s.mutex.Lock()
-		// fmt.Printf("Semaphore %d has the turn\n", s.id)
+		fmt.Printf("\t\t==== SEMAPHORE %s ====\n", name)
+		semaphoreNode.setSemaphorState(true)
 		time.Sleep(2 * time.Second)
 		s.mutex.Unlock()
+		semaphoreNode.setSemaphorState(false)
 		time.Sleep(6 * time.Second)
 	}
 

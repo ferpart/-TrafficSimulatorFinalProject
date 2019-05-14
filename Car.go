@@ -48,7 +48,7 @@ func (c *Car) move(id int, path []string, vel float32) {
 
 				// move
 				g.lock.Lock()
-				fmt.Printf("|%d| [%s] --> [%s] \t [%v] | vel:%f\n", id, path[0], path[1], path, vel)
+				fmt.Printf("|%d| [%s] --> [%s] \t [%v]\n", id, path[0], path[1], path)
 				currentNode.setHasCar(false)
 				nextNode.setHasCar(true)
 				path = path[1:]
@@ -62,7 +62,7 @@ func (c *Car) move(id int, path []string, vel float32) {
 				}
 				// move
 				g.lock.Lock()
-				fmt.Printf("|%d| [%s] --> [%s] \t [%v] | vel:%f\n", id, path[0], path[1], path, vel)
+				fmt.Printf("|%d| [%s] --> [%s] \t [%v]\n", id, path[0], path[1], path)
 				currentNode.setHasCar(false)
 				nextNode.setHasCar(true)
 				path = path[1:]
