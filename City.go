@@ -171,7 +171,7 @@ func (c *City) printMap() {
 }
 
 // Generates the Cars
-func (c *City) generateCars(cars int) {
+func (c *City) generateCars(cars int) (carsToSpaw []Car) {
 	listPoint := make([]Point, 0)
 	for i := 0; i < cars; i++ {
 		p, err := getRandomPointStart()
@@ -200,9 +200,10 @@ func (c *City) generateCars(cars int) {
 			destinity, err = getDestinity(nodeName)
 		}
 		fmt.Printf("|%d| FROM [%s] ->  TO [%s]\n", i, nodeName, destinity)
+		carsToSpaw = append(carsToSpaw, c)
 		go g.nodes[indexNode].getCar().move(i, getPath(nodeName, destinity), velocitiesDict[r1.Intn(4)])
 	}
-
+	return carsToSpaw
 }
 
 func getDestinity(origin string) (string, error) {
@@ -294,7 +295,7 @@ func (c *City) run(cars int) {
 	go c.semList[3].acquireTurn("westS")
 
 	// Generate cars inside the graph
-	c.generateCars(cars)
+	GUI(c.generateCars(cars))
 
 	time.Sleep(3600 * time.Second)
 	return

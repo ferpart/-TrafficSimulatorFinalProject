@@ -1,6 +1,6 @@
 package main
 
-/* import "flag"
+import "flag"
 
 func main() {
 
@@ -13,4 +13,3 @@ func main() {
 	city.setSemaphores()
 	city.run(*ncars)
 }
-*/

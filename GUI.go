@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"time"
+
 	"github.com/veandco/go-sdl2/sdl"
 )
 
@@ -11,51 +12,56 @@ const screenWidth = 550
 const screenHeight = 550
 
 var listCars map[string]Position
+
 type Position struct {
 	x, y, w, h int32
 }
 
-func main() {
+/* func main() {
 	GUI()
-}
+} */
 
-func GUI() {
+func GUI(cars []Car) {
+	fmt.Println("LIST OF CARS")
+	for _, v := range cars {
+		fmt.Printf("[%d] Car: position-> (%s)\n", v.id, v.originPos)
+	}
 	listCars = make(map[string]Position)
 	// W - E
-	listCars["60"] = Position{x:20, y:310, w:20, h:10}
-	listCars["61"] = Position{x:70, y:310, w:20, h:10}
-	listCars["62"] = Position{x:120, y:310, w:20, h:10}
-	listCars["63"] = Position{x:170, y:310, w:20, h:10}
-	listCars["64"] = Position{x:220, y:310, w:20, h:10}
-	listCars["66"] = Position{x:320, y:310, w:20, h:10}
-	listCars["67"] = Position{x:370, y:310, w:20, h:10}
+	listCars["60"] = Position{x: 20, y: 310, w: 20, h: 10}
+	listCars["61"] = Position{x: 70, y: 310, w: 20, h: 10}
+	listCars["62"] = Position{x: 120, y: 310, w: 20, h: 10}
+	listCars["63"] = Position{x: 170, y: 310, w: 20, h: 10}
+	listCars["64"] = Position{x: 220, y: 310, w: 20, h: 10}
+	listCars["66"] = Position{x: 320, y: 310, w: 20, h: 10}
+	listCars["67"] = Position{x: 370, y: 310, w: 20, h: 10}
 
 	// S - N
-	listCars["106"] = Position{x:310, y:510, w:10, h:20}
-	listCars["96"] = Position{x:310, y:460, w:10, h:20}
-	listCars["86"] = Position{x:310, y:410, w:10, h:20}
-	listCars["76"] = Position{x:310, y:360, w:10, h:20}
-	listCars["66"] = Position{x:310, y:310, w:10, h:20}
-	listCars["46"] = Position{x:310, y:210, w:10, h:20}
-	listCars["36"] = Position{x:310, y:160, w:10, h:20}
+	listCars["106"] = Position{x: 310, y: 510, w: 10, h: 20}
+	listCars["96"] = Position{x: 310, y: 460, w: 10, h: 20}
+	listCars["86"] = Position{x: 310, y: 410, w: 10, h: 20}
+	listCars["76"] = Position{x: 310, y: 360, w: 10, h: 20}
+	listCars["66"] = Position{x: 310, y: 310, w: 10, h: 20}
+	listCars["46"] = Position{x: 310, y: 210, w: 10, h: 20}
+	listCars["36"] = Position{x: 310, y: 160, w: 10, h: 20}
 
 	// N - S
-	listCars["04"] = Position{x:230, y:20, w:10, h:20}
-	listCars["14"] = Position{x:230, y:70, w:10, h:20}
-	listCars["24"] = Position{x:230, y:120, w:10, h:20}
-	listCars["34"] = Position{x:230, y:170, w:10, h:20}
-	listCars["44"] = Position{x:230, y:220, w:10, h:20}
-	listCars["64"] = Position{x:230, y:320, w:10, h:20}
-	listCars["74"] = Position{x:230, y:370, w:10, h:20}
+	listCars["04"] = Position{x: 230, y: 20, w: 10, h: 20}
+	listCars["14"] = Position{x: 230, y: 70, w: 10, h: 20}
+	listCars["24"] = Position{x: 230, y: 120, w: 10, h: 20}
+	listCars["34"] = Position{x: 230, y: 170, w: 10, h: 20}
+	listCars["44"] = Position{x: 230, y: 220, w: 10, h: 20}
+	listCars["64"] = Position{x: 230, y: 320, w: 10, h: 20}
+	listCars["74"] = Position{x: 230, y: 370, w: 10, h: 20}
 
 	// E - W
-	listCars["410"] = Position{x:510, y:230, w:20, h:10}
-	listCars["49"] = Position{x:460, y:230, w:20, h:10}
-	listCars["48"] = Position{x:410, y:230, w:20, h:10}
-	listCars["47"] = Position{x:360, y:230, w:20, h:10}
-	listCars["46"] = Position{x:310, y:230, w:20, h:10}
-	listCars["44"] = Position{x:210, y:230, w:20, h:10}
-	listCars["43"] = Position{x:160, y:230, w:20, h:10}
+	listCars["410"] = Position{x: 510, y: 230, w: 20, h: 10}
+	listCars["49"] = Position{x: 460, y: 230, w: 20, h: 10}
+	listCars["48"] = Position{x: 410, y: 230, w: 20, h: 10}
+	listCars["47"] = Position{x: 360, y: 230, w: 20, h: 10}
+	listCars["46"] = Position{x: 310, y: 230, w: 20, h: 10}
+	listCars["44"] = Position{x: 210, y: 230, w: 20, h: 10}
+	listCars["43"] = Position{x: 160, y: 230, w: 20, h: 10}
 
 	err := sdl.Init(sdl.INIT_EVERYTHING)
 	if err != nil {
@@ -93,29 +99,29 @@ func GUI() {
 				}
 			}
 		}
-		
+
 		// Creating the map
 		// Set color gray
 		// red, green, blue, alpha (alpha determines opaque-ness - usually 255)
 		renderer.SetDrawColor(128, 128, 128, 255)
-		
+
 		renderer.Clear()
-		
+
 		// 1st quadrant
 		renderer.SetDrawColor(0, 255, 0, 255)
 		renderer.FillRect(&sdl.Rect{350, 0, 200, 200})
-		
+
 		// 2nd quadrant
 		renderer.SetDrawColor(0, 255, 0, 255)
 		renderer.FillRect(&sdl.Rect{0, 0, 200, 200})
-		
+
 		// 3rd quadrant
 		renderer.SetDrawColor(0, 255, 0, 255)
 		renderer.FillRect(&sdl.Rect{0, 350, 200, 200})
 
 		// 4th quadrant
 		renderer.SetDrawColor(0, 255, 0, 255)
-		renderer.FillRect(&sdl.Rect{350, 350, 200, 200})	
+		renderer.FillRect(&sdl.Rect{350, 350, 200, 200})
 		renderer.SetDrawColor(0, 0, 255, 255)
 
 		// Yellow Lines
@@ -139,10 +145,9 @@ func GUI() {
 		// 4th quad
 		renderer.SetDrawColor(0, 0, 0, 255)
 		renderer.FillRect(&sdl.Rect{315, 350, 35, 10})
-		
 
 		renderer.SetDrawColor(0, 0, 255, 255)
-		for _, v := range listCars{
+		for _, v := range listCars {
 			renderer.FillRect(&sdl.Rect{v.x, v.y, v.w, v.h})
 		}
 
