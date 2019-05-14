@@ -39,15 +39,9 @@ City Traffic Simulator has a ?? based architecture. It consists of ## .go files 
 **************************
 
 ### Libraries
-- SDL 2.0 (Installation notes on (CITY_TRAFFIC.md)[CITY_TRAFFIC.md])
+- SDL 2.0 (Installation notes on [CITY_TRAFFIC.md](CITY_TRAFFIC.md))
 
 ### City Traffic Simulator prerequisites:
 - Have Golang installed.
 - Run on a bash terminal.
 - SDL 2.0
-
-
-### To Compile City Traffic Simulator:
-```
-    $ make run
-```
